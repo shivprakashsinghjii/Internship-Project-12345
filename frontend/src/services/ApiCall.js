@@ -18,6 +18,7 @@ export const commonrequest = async (methods, url, body, header) => {
       return data;
     })
     .catch((error) => {
-      return error;
+      console.error("Error:", error.response); // Log detailed error response
+      return error.response; // Return error response
     });
 };
