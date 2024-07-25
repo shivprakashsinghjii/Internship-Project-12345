@@ -2,13 +2,14 @@ import { BsFillShieldLockFill, BsTelephoneFill } from "react-icons/bs";
 import { CgSpinner } from "react-icons/cg";
 
 import OtpInput from "otp-input-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { auth } from "../task1/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PhoneAuthentication = () => {
   const [otp, setOtp] = useState("");
@@ -18,6 +19,36 @@ const PhoneAuthentication = () => {
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+  const location = useLocation();
+  const { selectedLanguage } = location.state || {};
+
+  useEffect(() => {
+    if (user && selectedLanguage) {
+      applyLanguageAndBackground(selectedLanguage);
+    }
+  }, [user, selectedLanguage]);
+
+  const applyLanguageAndBackground = (languageCode) => {
+    let backgroundColor = "#ffffff"; // Default white
+
+    switch (languageCode) {
+      case "hi":
+        backgroundColor = "#007BFF"; // Blue for Hindi
+        break;
+      case "zh":
+        backgroundColor = "#28A745"; // Green for Chinese
+        break;
+      case "fr":
+        backgroundColor = "#FFC107"; // Yellow for French
+        break;
+      default:
+        break;
+    }
+
+    document.body.style.backgroundColor = backgroundColor;
+    i18n.changeLanguage(languageCode);
+  };
 
   function onCaptchVerify() {
     if (!window.recaptchaVerifier) {
