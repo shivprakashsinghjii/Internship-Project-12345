@@ -7,7 +7,7 @@ i18n
   .use(initReactI18next)
   .init({
     debug: true,
-    fallbackLng: "en", // Default fallback language
+    fallbackLng: "en",
     resources: {
       en: {
         translation: {
@@ -159,7 +159,6 @@ i18n
           mobile: "Mobile",
         },
       },
-      // Add translations for other languages as needed
     },
   });
 

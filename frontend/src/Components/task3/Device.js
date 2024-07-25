@@ -17,7 +17,7 @@ const Device = () => {
   const updateUserInfo = () => {
     const email = localStorage.getItem("email");
     const info = {
-      email: email || "Unknown", // Add email to the userInfo object
+      email: email || "Unknown",
       browser: t(platform.name.toLowerCase()) || platform.name,
       os: t(platform.os.family.toLowerCase()) || platform.os.family,
       deviceType: isMobile ? t("mobile") : t("desktop"),
@@ -42,18 +42,14 @@ const Device = () => {
       }
     };
 
-    // Fetch IP address when component mounts
     fetchIpAddress();
 
-    // Set initial user info
     updateUserInfo();
 
-    // Auto-refresh the page every 3 seconds
     const intervalId = setInterval(() => {
       // updateUserInfo();
     }, 3000);
 
-    // Clear the interval on component unmount
     return () => {
       clearInterval(intervalId);
     };

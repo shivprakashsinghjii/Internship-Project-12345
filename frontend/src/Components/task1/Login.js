@@ -1,32 +1,34 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { sentOtpFunction } from "../../services/Apis";
+import { NavLink, useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import { sentOtpFunction } from "../../services/Apis";
 
 const styles = {
   body: {
     backgroundColor: "#f7f7f7",
-    fontFamily: "Arial, sans-serif",
   },
   section: {
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     height: "100vh",
+
+    alignItems: "center",
+    justifyContent: "center",
   },
   form_data: {
-    backgroundColor: "#fff",
+    width: "300px",
     padding: "20px",
     borderRadius: "8px",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-    width: "300px",
+
+    backgroundColor: "#fff",
   },
   form_heading: {
-    marginBottom: "20px",
     textAlign: "center",
+    marginBottom: "20px",
   },
   form_input: {
     marginBottom: "15px",
@@ -42,21 +44,21 @@ const styles = {
     border: "1px solid #ccc",
   },
   btn: {
-    width: "100%",
-    padding: "10px",
     backgroundColor: "#007bff",
     color: "#fff",
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
+    width: "100%",
+    padding: "10px",
     fontSize: "16px",
   },
   spinner: {
     marginLeft: "10px",
   },
   link: {
-    textAlign: "center",
     marginTop: "15px",
+    textAlign: "center",
   },
 };
 

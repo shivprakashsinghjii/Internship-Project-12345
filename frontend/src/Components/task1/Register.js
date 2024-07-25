@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, NavLink } from "react-router-dom";
 import { registerfunction } from "../../services/Apis";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const styles = {
   body: {
     backgroundColor: "#f7f7f7",
-    fontFamily: "Arial, sans-serif",
     padding: "10px",
+    fontFamily: "Arial, sans-serif",
   },
   section: {
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
     height: "100vh",
+    justifyContent: "center",
   },
   form_data: {
     backgroundColor: "#fff",
@@ -37,10 +37,10 @@ const styles = {
     fontWeight: "bold",
   },
   form_input_input: {
-    width: "100%",
-    padding: "10px",
     borderRadius: "4px",
     border: "1px solid #ccc",
+    width: "100%",
+    padding: "10px",
   },
   two: {
     display: "flex",
@@ -52,15 +52,16 @@ const styles = {
     color: "#007bff",
   },
   btn: {
-    width: "100%",
-    padding: "10px",
-    backgroundColor: "#007bff",
     color: "#fff",
-    border: "none",
-    borderRadius: "4px",
+
     cursor: "pointer",
     fontSize: "16px",
     marginTop: "10px",
+    width: "100%",
+    border: "none",
+    borderRadius: "4px",
+    padding: "10px",
+    backgroundColor: "#007bff",
   },
   link: {
     textAlign: "center",

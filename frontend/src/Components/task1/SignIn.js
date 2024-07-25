@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Spinner from "react-bootstrap/Spinner";
+import { signInWithPopup } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { sentOtpFunction } from "../../services/Apis";
 import { auth, provider } from "./firebase.config";
-import { signInWithPopup } from "firebase/auth";
+import "react-toastify/dist/ReactToastify.css";
+
 import Image from "../../Assets/Log_in.png";
+import { ToastContainer, toast } from "react-toastify";
+
+import Spinner from "react-bootstrap/Spinner";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -71,21 +73,21 @@ const SignIn = () => {
   }, [navigate]);
 
   return (
-    <div className="bg-gray-100 h-screen flex items-center justify-center px-4">
-      <div className="flex flex-col md:flex-row w-full max-w-4xl h-auto shadow-lg rounded-lg overflow-hidden">
+    <div className=" items-center justify-center bg-gray-100 h-screen flex px-4">
+      <div className=" flex-col flex md:flex-row w-full max-w-4xl h-auto shadow-lg rounded-lg overflow-hidden">
         <div className="hidden md:flex md:w-1/2 bg-gray-100 items-center justify-center p-4">
           <img src={Image} alt="Login" className="max-w-full h-auto" />
         </div>
-        <div className="flex flex-col justify-center items-center bg-white w-full md:w-1/2 p-6">
+        <div className=" justify-center flex flex-col items-center bg-white w-full md:w-1/2 p-6">
           <div className="w-full max-w-sm">
             <div className="mb-6 text-center">
-              <h1 className="text-2xl font-bold">Log In</h1>
+              <h1 className=" font-bold text-2xl">Log In</h1>
             </div>
             <form>
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className=" font-medium block text-sm text-gray-700"
                 >
                   Email
                 </label>
@@ -95,7 +97,7 @@ const SignIn = () => {
                   id="email"
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter Your Email Address"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="py-2 border mt-1 block w-full px-3  border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
               <button
@@ -111,14 +113,14 @@ const SignIn = () => {
               </button>
             </form>
             <div className="flex items-center my-4">
-              <div className="flex-grow border-t border-gray-300"></div>
+              <div className="border-t flex-grow  border-gray-300"></div>
               <span className="px-4 text-gray-500">OR</span>
-              <div className="flex-grow border-t border-gray-300"></div>
+              <div className=" border-gray-300 flex-grow border-t"></div>
             </div>
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              className="w-full py-2 px-4 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 flex items-center justify-center space-x-2"
+              className="w-full py-2 px-4 flex items-center justify-center bg-red-500 space-x-2 text-white font-semibold rounded-md hover:bg-red-600  "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { sentOtpFunction } from "../../services/Apis";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -34,9 +34,9 @@ const Login = () => {
 
   return (
     <>
-      <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-        <section className="flex justify-center items-center h-full">
-          <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
+      <div className="items-center justify-center bg-gray-100 min-h-screen flex ">
+        <section className=" items-center h-full flex justify-center">
+          <div className="bg-white p-8  rounded-lg shadow-md w-full max-w-sm ">
             <div className="mb-6 text-center">
               <h1 className="text-2xl font-bold">
                 Pour passer au français, veuillez authentifier l'email.
@@ -46,7 +46,7 @@ const Login = () => {
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="font-medium block text-sm  text-gray-700"
                 >
                   e-mail
                 </label>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
 import { userVerify } from "../../../src/services/Apis";
-import LanguageSelector from "./LanguageSelector"; // Import your LanguageSelector component
+import LanguageSelector from "./LanguageSelector";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Otp = () => {
   const [otp, setOtp] = useState("");
@@ -51,12 +51,12 @@ const Otp = () => {
   return (
     <>
       <section className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <div className=" p-6 rounded-lg bg-white shadow-md w-full max-w-md">
           <form>
             <div className="mb-4">
               <label
                 htmlFor="otp"
-                className="block text-sm font-medium text-gray-700"
+                className="font-medium block text-sm  text-gray-700"
               >
                 OTP
               </label>
@@ -67,11 +67,11 @@ const Otp = () => {
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
                 placeholder="Enter OTP"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className=" border-gray-300 rounded-md mt-1 block w-full px-3 py-2 border shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
             <button
-              className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 text-2xl"
+              className=" bg-blue-500 w-full py-2 px-4 text-white font-semibold rounded-md hover:bg-blue-600 text-2xl"
               onClick={loginUser}
             >
               &rarr; Verify OTP

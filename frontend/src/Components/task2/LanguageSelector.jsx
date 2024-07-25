@@ -1,5 +1,3 @@
-// LanguageSelector.js
-
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -20,18 +18,17 @@ const LanguageSelector = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const changeLanguageFunction = (languageCode, redirectPath) => {
-    let backgroundColor = "#ffffff"; // Default white
+    let backgroundColor = "#ffffff";
 
     switch (languageCode) {
       case "hi":
-        backgroundColor = "#007BFF"; // Blue for Hindi
+        backgroundColor = "#007BFF";
         break;
       case "zh":
-        backgroundColor = "#28A745"; // Green for Chinese
+        backgroundColor = "#28A745";
         break;
       case "fr":
-        backgroundColor = "#FFC107"; // Yellow for French
-        break;
+        backgroundColor = "#FFC107";
       default:
         break;
     }
