@@ -32,7 +32,7 @@ const Home = () => {
     }
 
     const intervalId = setInterval(() => {
-      // window.location.reload();
+      window.location.reload();
     }, 3000);
 
     return () => {
