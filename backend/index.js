@@ -118,7 +118,7 @@ app.get("/api/device-info", async (req, res) => {
         return info;
       })
     );
-    res.status(200).json(updatedDeviceInfos);
+    res.status(200).send(updatedDeviceInfos);
   } catch (error) {
     console.error("Error fetching device info from MongoDB:", error); // Debugging log
     res.status(500).json({ message: "Server error" });
