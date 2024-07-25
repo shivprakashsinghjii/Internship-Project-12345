@@ -8,6 +8,12 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const router = require("./Routes/router"); // Ensure this path is correct
 
+const corsConfig = {
+  origin: "*",
+  credential: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
+
 // Initialize Express application
 const app = express();
 const PORT = process.env.PORT || 4002; // Use PORT defined in .env or default to 4002
@@ -37,7 +43,8 @@ mongoose
 function startServer() {
   // Middleware
   app.use(express.json()); // Parse JSON request bodies
-  app.use(cors());
+  app.options("", cors(corsConfig));
+  app.use(cors(corsConfig));
   app.use(bodyParser.json());
   app.use(router); // Use router from Routes
 
