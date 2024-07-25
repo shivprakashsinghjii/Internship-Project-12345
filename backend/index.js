@@ -11,7 +11,7 @@ const router = require("./Routes/router"); // Ensure this path is correct
 const corsConfig = {
   origin: "*",
   credential: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  // methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
 // Initialize Express application

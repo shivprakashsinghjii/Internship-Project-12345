@@ -8,7 +8,7 @@
   ],
    "rewrites": [{ 
    "source": "/(.*)", 
-   "destination": "/",
-   "methods":["GET","POST","PUT","PATCH","DELETE","OPTIONS"]
+   "destination": "/"
+ 
     }] 
 }
