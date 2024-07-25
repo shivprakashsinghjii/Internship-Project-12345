@@ -12,6 +12,11 @@ const Home = () => {
   useEffect(() => {
     const storedEmail = localStorage.getItem("email");
     const userToken = localStorage.getItem("userdbtoken");
+    const selectedLanguage = localStorage.getItem("selectedLanguage");
+
+    if (selectedLanguage) {
+      i18n.changeLanguage(selectedLanguage);
+    }
 
     const isMobileDevice = () => {
       return /Mobi|Android/i.test(navigator.userAgent);
@@ -38,7 +43,7 @@ const Home = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [navigate]);
+  }, [navigate, i18n]);
 
   useEffect(() => {
     // Set background color based on language
@@ -114,8 +119,8 @@ const Home = () => {
           </div>
         </div>
       </nav>
-      <div className="flex-grow flex    flex-col items-center justify-start pt-8">
-        <div className="w-full text-center max-w-md ">
+      <div className="flex-grow flex flex-col items-center justify-start pt-8">
+        <div className="w-full text-center max-w-md">
           <Language />
           <Device />
         </div>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { changeLanguage } from "i18next";
 
 const languages = [
   { code: "en", lang: "English", redirectPath: "/phone" },
@@ -29,6 +28,7 @@ const LanguageSelector = () => {
         break;
       case "fr":
         backgroundColor = "#FFC107";
+        break;
       default:
         break;
     }
@@ -38,6 +38,7 @@ const LanguageSelector = () => {
     // Change language using i18n
     i18n.changeLanguage(languageCode);
     setSelectedLanguage(languageCode);
+    localStorage.setItem("selectedLanguage", languageCode);
     navigate(redirectPath);
   };
 
