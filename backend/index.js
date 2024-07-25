@@ -1,10 +1,27 @@
+// Load environment variables from .env file
+require("dotenv").config();
+
+// Import required modules
+const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
-require("dotenv").config(); // Ensure this is at the top to load environment variables
+const bodyParser = require("body-parser");
+const router = require("./Routes/router"); // Ensure this path is correct
 
-const DB = process.env.DATABASE;
+// Initialize Express application
+const app = express();
+const PORT = process.env.PORT || 4002; // Use PORT defined in .env or default to 4002
 
+// Check if MONGODB_URI is defined
+const mongoURI = process.env.DATABASE;
+if (!mongoURI) {
+  console.error("MONGODB_URI is not defined in .env file");
+  process.exit(1); // Exit the process if URI is not defined
+}
+
+// MongoDB connection
 mongoose
-  .connect(DB, {
+  .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -18,20 +35,33 @@ mongoose
   });
 
 function startServer() {
-  const express = require("express");
-  const cors = require("cors");
-  const bodyParser = require("body-parser");
-  const router = require("./Routes/router"); // Ensure this path is correct
-
-  // Initialize Express application
-  const app = express();
-  const PORT = process.env.PORT || 4002; // Use PORT defined in .env or default to 4002
-
   // Middleware
   app.use(express.json()); // Parse JSON request bodies
   app.use(cors());
   app.use(bodyParser.json());
   app.use(router); // Use router from Routes
+
+  // Define the Device schema and model
+  const deviceSchema = new mongoose.Schema({
+    email: String,
+    browser: String,
+    os: String,
+    deviceType: String,
+    ipAddress: String,
+    timestamp: { type: Date, default: Date.now },
+  });
+
+  const DeviceInfo = mongoose.model("DeviceInfo", deviceSchema);
+
+  // Define the User schema and model (assuming 'users' collection)
+  const userSchema = new mongoose.Schema({
+    email: String,
+    ipAddress: String,
+    timestamp: { type: Date, default: Date.now }, // Add a timestamp field for sorting
+    // Add other relevant fields
+  });
+
+  const User = mongoose.model("User", userSchema);
 
   // Root route
   app.get("/", (req, res) => {
