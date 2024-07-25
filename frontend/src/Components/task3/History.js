@@ -11,7 +11,7 @@ const History = () => {
         const response = await fetch("http://localhost:4002/api/device-info");
         if (response.ok) {
           const data = await response.json();
-          setDeviceInfo(data);
+          setDeviceInfo(data.data); // Ensure data is set correctly
         } else {
           console.error("Failed to fetch device info data");
         }
