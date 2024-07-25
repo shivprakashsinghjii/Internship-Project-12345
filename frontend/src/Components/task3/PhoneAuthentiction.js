@@ -83,9 +83,11 @@ const PhoneAuthentication = () => {
           </h2>
         ) : (
           <div className="w-80 flex flex-col gap-4 rounded-lg p-4">
-            <h1 className="text-center leading-normal text-white font-medium text-3xl mb-6">
-              Welcome to <br /> CODE A PROGRAM
-            </h1>
+            <p className=" text-white font-medium text-2xl mb-6">
+              **Sometime due to many requests, the firebase exceeds its limit
+              then at that time you can use Phone no "+1870-060-7533" and OTP
+              "123456" for testing.
+            </p>
             {showOTP ? (
               <>
                 <div className="bg-white text-emerald-500 w-fit mx-auto p-4 rounded-full">

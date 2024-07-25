@@ -1,27 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import Device from "./Device";
 
 const History = () => {
-  const [deviceInfo, setDeviceInfo] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:4002/api/device-info");
-        if (response.ok) {
-          const data = await response.json();
-          setDeviceInfo(data.data); // Ensure data is set correctly
-        } else {
-          console.error("Failed to fetch device info data");
-        }
-      } catch (error) {
-        console.error("Error fetching device info data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const handleHome = () => {
     navigate("/home");
@@ -49,34 +31,7 @@ const History = () => {
           Logout
         </button>
       </div>
-      <h2 className="text-lg font-bold mb-2">Device Information History</h2>
-      {deviceInfo.length > 0 ? (
-        deviceInfo.map((info) => (
-          <div
-            key={info._id}
-            className="mb-4 p-2 border border-gray-300 rounded"
-          >
-            <p>
-              <strong>Browser:</strong> {info.browser}
-            </p>
-            <p>
-              <strong>Operating System:</strong> {info.os}
-            </p>
-            <p>
-              <strong>Device Type:</strong> {info.deviceType}
-            </p>
-            <p>
-              <strong>IP Address:</strong> {info.ipAddress}
-            </p>
-            <p>
-              <strong>Timestamp:</strong>{" "}
-              {new Date(info.timestamp).toLocaleString()}
-            </p>
-          </div>
-        ))
-      ) : (
-        <p>No device information data available</p>
-      )}
+      <Device />
     </div>
   );
 };

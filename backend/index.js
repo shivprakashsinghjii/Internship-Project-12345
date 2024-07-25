@@ -1,7 +1,4 @@
-// Load environment variables from .env file
 require("dotenv").config();
-
-// Import required modules
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -9,23 +6,20 @@ const bodyParser = require("body-parser");
 const router = require("./Routes/router"); // Ensure this path is correct
 
 const corsConfig = {
-  origin: "*",
-  credential: true,
+  origin: ["*"],
+  credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
-// Initialize Express application
 const app = express();
-const PORT = process.env.PORT || 4002; // Use PORT defined in .env or default to 4002
+const PORT = process.env.PORT || 4002;
 
-// Check if MONGODB_URI is defined
 const mongoURI = process.env.DATABASE;
 if (!mongoURI) {
   console.error("MONGODB_URI is not defined in .env file");
-  process.exit(1); // Exit the process if URI is not defined
+  process.exit(1);
 }
 
-// MongoDB connection
 mongoose
   .connect(mongoURI, {
     useNewUrlParser: true,
@@ -33,7 +27,6 @@ mongoose
   })
   .then(() => {
     console.log("Connected to MongoDB");
-    // Start the server only after successful connection
     startServer();
   })
   .catch((error) => {
@@ -41,14 +34,11 @@ mongoose
   });
 
 function startServer() {
-  // Middleware
-  app.use(express.json()); // Parse JSON request bodies
-  app.options("", cors(corsConfig));
+  app.use(express.json());
   app.use(cors(corsConfig));
   app.use(bodyParser.json());
-  app.use(router); // Use router from Routes
+  app.use(router);
 
-  // Define the Device schema and model
   const deviceSchema = new mongoose.Schema({
     email: String,
     browser: String,
@@ -60,24 +50,21 @@ function startServer() {
 
   const DeviceInfo = mongoose.model("DeviceInfo", deviceSchema);
 
-  // Define the User schema and model (assuming 'users' collection)
   const userSchema = new mongoose.Schema({
     email: String,
     ipAddress: String,
-    timestamp: { type: Date, default: Date.now }, // Add a timestamp field for sorting
-    // Add other relevant fields
+    timestamp: { type: Date, default: Date.now },
   });
 
   const User = mongoose.model("User", userSchema);
 
-  // Root route
   app.get("/", (req, res) => {
     res.status(200).send("Hi, It works!");
   });
 
-  // Route to handle data submission
   app.post("/api/device-info", async (req, res) => {
-    console.log("Received data:", req.body); // Debugging log
+    console.log("Received data:", req.body);
+
     let { email, browser, os, deviceType, ipAddress } = req.body;
 
     if (email === "Unknown") {
@@ -87,7 +74,7 @@ function startServer() {
           email = user.email;
         }
       } catch (error) {
-        console.error("Error fetching email from users collection:", error); // Debugging log
+        console.error("Error fetching email from users collection:", error);
       }
     }
 
@@ -114,12 +101,11 @@ function startServer() {
 
       res.status(200).json({ message: "No new data to save" });
     } catch (error) {
-      console.error("Error saving data to MongoDB:", error); // Debugging log
+      console.error("Error saving data to MongoDB:", error);
       res.status(500).json({ message: "Server error" });
     }
   });
 
-  // Route to fetch device information
   app.get("/api/device-info", async (req, res) => {
     try {
       const deviceInfos = await DeviceInfo.find();
@@ -141,19 +127,18 @@ function startServer() {
       console.log(
         "Device information retrieved successfully",
         updatedDeviceInfos
-      ); // Add log
+      );
       res.status(200).json({
         message: "Device information retrieved successfully",
         data: updatedDeviceInfos,
       });
     } catch (error) {
-      console.error("Error fetching device info from MongoDB:", error); // Debugging log
+      console.error("Error fetching device info from MongoDB:", error);
       res.status(500).json({ message: "Server error" });
     }
   });
 
-  // Start server
   app.listen(PORT, () => {
-    console.log(`Server started at port no ${PORT}`);
+    console.log(`Server started at port ${PORT}`);
   });
 }

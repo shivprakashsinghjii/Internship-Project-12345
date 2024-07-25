@@ -41,6 +41,7 @@ const Home = () => {
   }, [navigate]);
 
   useEffect(() => {
+    // Set background color based on language
     switch (i18n.language) {
       case "hi":
         document.body.style.backgroundColor = "blue";
@@ -55,6 +56,10 @@ const Home = () => {
         document.body.style.backgroundColor = "white";
         break;
     }
+
+    // Set text color to white for certain languages
+    const isWhiteText = i18n.language === "hi" || i18n.language === "zh";
+    document.body.style.color = isWhiteText ? "white" : "black";
   }, [i18n.language]);
 
   const handleLogout = () => {
@@ -67,19 +72,16 @@ const Home = () => {
     navigate("/history");
   };
 
-  const isWhiteText = i18n.language === "hi" || i18n.language === "zh";
-
   if (!isAllowed) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <h1 className="text-3xl font-bold">Access Restricted</h1>
-        <p className="text-lg">
-          Access to the website is only allowed from 10 AM to 1 PM on mobile
-          devices.
-        </p>
+        <h1 className="text-3xl font-bold">{t("accessRestricted")}</h1>
+        <p className="text-lg">{t("accessRestrictedMessage")}</p>
       </div>
     );
   }
+
+  const isWhiteText = i18n.language === "hi" || i18n.language === "zh";
 
   return (
     <div className="min-h-screen flex flex-col">
