@@ -1,23 +1,47 @@
-import React from "react";
+// LanguageSelector.js
+
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { changeLanguage } from "i18next";
 
 const languages = [
-  { code: "en", lang: "English" },
-  { code: "es", lang: "Spanish" },
-  { code: "hi", lang: "Hindi" },
-  { code: "pt", lang: "Portuguese" },
-  { code: "zh", lang: "Chinese" },
-  { code: "fr", lang: "French" },
+  { code: "en", lang: "English", redirectPath: "/phone" },
+  { code: "es", lang: "Spanish", redirectPath: "/phone" },
+  { code: "hi", lang: "Hindi", redirectPath: "/phone" },
+  { code: "pt", lang: "Portuguese", redirectPath: "/phone" },
+  { code: "zh", lang: "Chinese", redirectPath: "/phone" },
+  { code: "fr", lang: "French", redirectPath: "/otplan" },
 ];
 
 const LanguageSelector = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const [selectedLanguage, setSelectedLanguage] = useState("");
 
-  const changeLanguageFunction = (languageCode) => {
-    // Navigate to /phone with selected language in state
-    navigate("/phone", { state: { selectedLanguage: languageCode } });
+  const changeLanguageFunction = (languageCode, redirectPath) => {
+    let backgroundColor = "#ffffff"; // Default white
+
+    switch (languageCode) {
+      case "hi":
+        backgroundColor = "#007BFF"; // Blue for Hindi
+        break;
+      case "zh":
+        backgroundColor = "#28A745"; // Green for Chinese
+        break;
+      case "fr":
+        backgroundColor = "#FFC107"; // Yellow for French
+        break;
+      default:
+        break;
+    }
+
+    document.body.style.backgroundColor = backgroundColor;
+
+    // Change language using i18n
+    i18n.changeLanguage(languageCode);
+    setSelectedLanguage(languageCode);
+    navigate(redirectPath);
   };
 
   return (
@@ -27,7 +51,9 @@ const LanguageSelector = () => {
           key={language.code}
           code={language.code}
           lang={t(language.lang)}
-          changeLanguage={() => changeLanguageFunction(language.code)}
+          changeLanguage={() =>
+            changeLanguageFunction(language.code, language.redirectPath)
+          }
         />
       ))}
     </div>
