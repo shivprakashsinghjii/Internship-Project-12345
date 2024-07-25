@@ -8,13 +8,16 @@ import "react-phone-input-2/lib/style.css";
 import { auth } from "../task1/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-const PhoneAuthentiction = () => {
+const PhoneAuthentication = () => {
   const [otp, setOtp] = useState("");
   const [ph, setPh] = useState("");
   const [loading, setLoading] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
   const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
 
   function onCaptchVerify() {
     if (!window.recaptchaVerifier) {
@@ -45,7 +48,7 @@ const PhoneAuthentiction = () => {
         window.confirmationResult = confirmationResult;
         setLoading(false);
         setShowOTP(true);
-        toast.success("OTP sended successfully!");
+        toast.success("OTP sent successfully!");
       })
       .catch((error) => {
         console.log(error);
@@ -61,6 +64,7 @@ const PhoneAuthentiction = () => {
         console.log(res);
         setUser(res.user);
         setLoading(false);
+        navigate("/home"); // Navigate to /home on successful login
       })
       .catch((err) => {
         console.log(err);
@@ -75,7 +79,7 @@ const PhoneAuthentiction = () => {
         <div id="recaptcha-container"></div>
         {user ? (
           <h2 className="text-center text-white font-medium text-2xl">
-            👍Login Success
+            Redirecting...
           </h2>
         ) : (
           <div className="w-80 flex flex-col gap-4 rounded-lg p-4">
@@ -142,4 +146,4 @@ const PhoneAuthentiction = () => {
   );
 };
 
-export default PhoneAuthentiction;
+export default PhoneAuthentication;
